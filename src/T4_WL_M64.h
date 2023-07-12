@@ -7,6 +7,9 @@
 
 struct M64_MODEM_INST
 {
+    uint8_t     comm_in_progress;   // used if parse begins while RXing
+    uint8_t     comm_msg_type;      // Actively being RXd message type
+    
     uint8_t     protocol_ver_major;
     uint8_t     protocol_ver_minor;
     uint8_t     protocol_ver_patch;
@@ -24,6 +27,7 @@ struct M64_MODEM_INST
     uint8_t     last_rx_len;
 };
 
+void inline M64_CLEAR_SER_BUFF();
 uint8_t inline M64_SERIAL_PEEK();
 uint8_t inline M64_SERIAL_READ();
 uint8_t inline M64_SERIAL_AVAIL();
@@ -38,7 +42,16 @@ bool M64_set_modem_config(struct M64_MODEM_INST *a, uint8_t role, uint8_t channe
 
 bool M64_send_packet(uint8_t size, uint8_t *payload);
 
+// So we're going to use U32 types to hold 4 chars
+//  might be slower but the rest of this is a trainwreck so whatever
+uint8_t M64_fill_u32_to_delim(uint32_t *a, uint8_t delim);
+void inline M64_deal_with_checksum(struct M64_MODEM_INST *a);
+// Str -> int cvt, no negatives, all int
+uint16_t M64_TEENYFAST_ATOI(uint32_t a);
+
 // Returns the message type decoded, if any
 char M64_parser(struct M64_MODEM_INST *a);
+
+char M64_parser_2(struct M64_MODEM_INST *a);
 
 #endif

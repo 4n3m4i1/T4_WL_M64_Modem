@@ -5,7 +5,7 @@
 #define M64_VERSION         'v'
 #define M64_PAYLOAD_SIZE    'n'
 #define M64_CONFIG_GET      'c'
-#define M64_CONGIG_SET      's'
+#define M64_CONFIG_SET      's'
 #define M64_QUEUE_LEN       'l'
 #define M64_QUEUE_FLUSH     'f'
 #define M64_DIAGNOSTIC      'd'
@@ -18,8 +18,8 @@
 
 #define M64_NO_MESSAGE      '\0'
 
-#define M64_ACK
-#define M64_NACK
+#define M64_ACK             'a'
+#define M64_NACK            'n'
 
 #define M64_LINK_OK         'y'
 #define M64_LINK_BAD        'n'
@@ -29,3 +29,19 @@
 #define M64_MAX_PAYLOAD_SIZE    8
 
 #define M64_MIN_RQ_LEN      3
+
+#define M64_FIELD_DELIM     ','
+#define M64_EODF            '*'
+// Checksum at end of every response, *xx format
+#define M64_CHECKSUM_LEN        3
+//                             Data Bytes + Checksum Len + delimiters
+#define M64_VER_RES_LEN         (3 + M64_CHECKSUM_LEN + 3)
+#define M64_PAY_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
+#define M64_CFG_RES_LEN         (2 + M64_CHECKSUM_LEN + 2)
+#define M64_CFS_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
+#define M64_TXQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
+#define M64_FLQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
+#define M64_DIA_RES_LEN         (7 + M64_CHECKSUM_LEN + 4)
+#define M64_TXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
+#define M64_RXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1) // implicit + size
+#define 
