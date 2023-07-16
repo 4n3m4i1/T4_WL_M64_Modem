@@ -1,6 +1,18 @@
 
+#define M64_ROLE_CONTROLLER 'a'
+#define M64_ROLE_LISTENER   'b'
+
+// binary to char converter
+#define M64_CHANNEL(a)      ( (a < '0') ? a + '0' : a )
+
+#define M64_BAUD            115200
+
 #define M64_MSG_0           'w'
 #define M64_MSG_1           'c'
+
+#define M64_RS_MSG_1        'r'
+
+#define M64_TERM            '\n'
 
 #define M64_VERSION         'v'
 #define M64_PAYLOAD_SIZE    'n'
@@ -35,13 +47,14 @@
 // Checksum at end of every response, *xx format
 #define M64_CHECKSUM_LEN        3
 //                             Data Bytes + Checksum Len + delimiters
-#define M64_VER_RES_LEN         (3 + M64_CHECKSUM_LEN + 3)
-#define M64_PAY_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
-#define M64_CFG_RES_LEN         (2 + M64_CHECKSUM_LEN + 2)
-#define M64_CFS_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
-#define M64_TXQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
-#define M64_FLQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
-#define M64_DIA_RES_LEN         (7 + M64_CHECKSUM_LEN + 4)
-#define M64_TXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1)
-#define M64_RXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1) // implicit + size
-#define 
+#define M64_VER_RES_LEN         (3 + M64_CHECKSUM_LEN + 3 + 2)
+#define M64_PAY_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2)
+#define M64_CFG_RES_LEN         (2 + M64_CHECKSUM_LEN + 2 + 2)
+#define M64_CFS_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2)
+#define M64_TXQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2)
+#define M64_FLQ_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2)
+#define M64_DIA_RES_LEN         (7 + M64_CHECKSUM_LEN + 4 + 2)
+#define M64_TXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2)
+#define M64_RXP_RES_LEN         (1 + M64_CHECKSUM_LEN + 1 + 2) // implicit + size
+#define M64_MAL_REQ_LEN         (1 + M64_CHECKSUM_LEN + 2)      // I think? This is not documented well
+#define M64_CHKSUM_ERR_LEN      (1 + M64_CHECKSUM_LEN + 2)
